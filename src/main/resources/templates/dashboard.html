@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>INVENTORY MANAGEMENT SYSTEM</title>
+<link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<h3 class="navbar-item title" style="margin-bottom: 0;">IMS</h3>
+			<a role="button" class="navbar-burger burger" aria-label="menu"
+				aria-expanded="false" data-target="navbarBasicExample"> <span
+				aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+				aria-hidden="true"></span>
+			</a>
+		</div>
+
+		<div id="navbarBasicExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" th:href="@{/dashboard}">Dashboard</a> <a
+					class="navbar-item" th:href="@{/allCategory}">Category</a> <a
+					class="navbar-item" th:href="@{/allProducts}">Products</a><a
+					class="navbar-item" th:href="@{/allUnits}">Units</a> <a
+					class="navbar-item" th:href="@{/mainStock}">Main Stock</a> <a
+					class="navbar-item" th:href="@{/sales}">Sales</a>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="has-background-dark" style="height: 2px;"></div>
+	<div style="height: 10px;"></div>
+
+
+	<div class="level-left" style="padding-left: 20px">
+		<div class="box">
+			<div class="field is-grouped">
+				<div class="control">
+					<a th:href="@{/charts}">REPORT CHARTS</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="level" style="padding-left: 20px">
+		<div class="level-left">
+
+
+			<div style="width: 650px; margin: auto">
+				<div class="box">
+					<div class="field is-grouped">
+						<div class="control">
+							<a class="button is-small is-link">TODAY'S SALE</a>
+						</div>
+					</div>
+					<table
+						class="table is-bordered is-striped  is-hoverable is-fullwidth">
+
+						<tr>
+							<th>DATE</th>
+							<th>CATEGORY NAME</th>
+							<th>PRODUCT NAME</th>
+							<th>QUANTITY</th>
+							<th>UNIT</th>
+
+						</tr>
+
+						<tr th:each="item: ${todaySales}">
+							<td th:text="${item.date}" />
+							<td th:text="${item.category.categoryName}" />
+							<td th:text="${item.product.ProductName}" />
+							<td th:text="${item.quantity}" />
+							<td th:text="${item.unit.unitName}" />
+
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="level-left">
+
+			<div style="width: 750px; padding-right: 20px; margin: auto">
+				<div class="box">
+					<div class="field is-grouped">
+						<div class="control">
+							<a class="button is-small is-link">CURRENT STOCK</a>
+						</div>
+					</div>
+					<table
+						class="table is-bordered is-striped  is-hoverable is-fullwidth">
+
+						<tr>
+
+							<th>CATEGORY NAME</th>
+							<th>PRODUCT NAME</th>
+							<th>QUANTITY</th>
+							<th>UNIT</th>
+
+						</tr>
+
+						<tr th:each="item: ${currentStocks}">
+							<td th:text="${item.category.categoryName}" />
+							<td th:text="${item.product.ProductName}" />
+							<td th:text="${item.quantity}" />
+							<td th:text="${item.unit.unitName}" />
+
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" th:inline="javascript">
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+		console.log([[${saleList}]])
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([[${saleList}]]);
+
+			var options = {
+				title : 'Sales',
+				curveType : 'function',
+				legend : {
+					position : 'bottom'
+				}
+			};
+
+			var chart = new google.visualization.LineChart(document
+					.getElementById('chart'));
+
+			chart.draw(data, options);
+		}
+	</script>
+	</div>
+</body>
+
+</html>

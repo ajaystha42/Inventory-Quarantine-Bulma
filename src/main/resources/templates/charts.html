@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>INVENTORY MANAGEMENT SYSTEM</title>
+<link href="css/new.css" rel="stylesheet" />
+
+</head>
+<body>
+<charts>
+
+	<div class="col-xl-12">
+		<div class="card mb-12">
+			<div class="card-header">
+				<i class="fas fa-chart-bar mr-1"></i>Sale
+			</div>
+
+			<div id="chart"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+		console.log([[${saleList}]])
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([[${saleList}]]);
+
+			var options = {
+				title : 'Sales',
+				curveType : 'function',
+				legend : {
+					position : 'bottom'
+				}
+			};
+
+			var chart = new google.visualization.LineChart(document
+					.getElementById('chart'));
+
+			chart.draw(data, options);
+		}
+	</script>
+</body>

@@ -1,0 +1,82 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>INVENTORY MANAGEMENT SYSTEM</title>
+<link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<h3 class="navbar-item title" style="margin-bottom: 0;">IMS</h3>
+			<a role="button" class="navbar-burger burger" aria-label="menu"
+				aria-expanded="false" data-target="navbarBasicExample"> <span
+				aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+				aria-hidden="true"></span>
+			</a>
+		</div>
+
+		<div id="navbarBasicExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" th:href="@{/dashboard}">Dashboard</a> <a
+					class="navbar-item" th:href="@{/allCategory}">Category</a> <a
+					class="navbar-item" th:href="@{/allProducts}">Products</a><a
+					class="navbar-item" th:href="@{/allUnits}">Units</a> <a
+					class="navbar-item" th:href="@{/mainStock}">Main Stock</a>  <a
+					class="navbar-item" th:href="@{/sales}">Sales</a>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="has-background-dark" style="height: 2px;"></div>
+	<div style="height: 10px;"></div>
+
+	
+	<div class="level-right"
+		style="padding-right: 20px; padding-left: 20px">
+
+		<div class="">
+
+			<a th:href="@{/allCategory}" class="box">Go Back</a>
+
+
+		</div>
+
+	</div>
+
+
+
+	<div style="width: 800px; margin: auto">
+		<form class="box" th:action="@{/editCategory(id=${categories.id})}"
+			th:object="${categories}" method="post">
+			<div class="field">
+				<label class="label is-small">Name</label>
+				<div class="control">
+					<input class="input is-small" type="text"
+						placeholder="Enter Category Name" th:field="*{categoryName}" />
+				</div>
+			</div>
+			<div class="field is-grouped">
+				<div class="control">
+					<button type="submit" class="button is-small is-link">
+						Update</button>
+				</div>
+				<div class="control"> 
+				<a th:href="@{/allCategory}" class="button is-small is-link is-light">Cancel</a>
+					
+				</div>
+			</div>
+		</form>
+
+	</div>
+	
+	
+	
+	
+	
+</body>
+
+</html>

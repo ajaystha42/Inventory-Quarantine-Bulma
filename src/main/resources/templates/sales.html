@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>INVENTORY MANAGEMENT SYSTEM</title>
+<link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<h3 class="navbar-item title" style="margin-bottom: 0;">IMS</h3>
+			<a role="button" class="navbar-burger burger" aria-label="menu"
+				aria-expanded="false" data-target="navbarBasicExample"> <span
+				aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+				aria-hidden="true"></span>
+			</a>
+		</div>
+
+		<div id="navbarBasicExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" th:href="@{/dashboard}">Dashboard</a> <a
+					class="navbar-item" th:href="@{/allCategory}">Category</a> <a
+					class="navbar-item" th:href="@{/allProducts}">Products</a><a
+					class="navbar-item" th:href="@{/allUnits}">Units</a> <a
+					class="navbar-item" th:href="@{/mainStock}">Main Stock</a>  <a
+					class="navbar-item" th:href="@{/sales}">Sales</a>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="has-background-dark" style="height: 2px;"></div>
+	<div style="height: 10px;"></div>
+
+
+
+
+
+
+	<div class="level" style="padding-left: 20px">
+		<div>
+			<form th:action="@{/addSales}" method="get">
+				<div class="field is-grouped">
+					<div class="control">
+						<button type="submit" class="button is-small is-success">
+							SALE ITEM</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+
+	</div>
+
+	<div class="level" style="padding-left: 20px">
+		<div class="level-left">
+
+			<div style="width: 1000px; margin: auto">
+				<div class="box">
+					<table
+						class="table is-bordered is-striped  is-hoverable is-fullwidth">
+
+						<tr>
+							<th>DATE</th>
+							<th>CATEGORY NAME</th>
+							<th>PRODUCT NAME</th>
+							<th>QUANTITY</th>
+							<th>UNIT</th>
+
+						</tr>
+
+						<tr th:each="item: ${sales}">
+							<td th:text="${item.date}" />
+							<td th:text="${item.category.categoryName}" />
+							<td th:text="${item.product.ProductName}" />
+							<td th:text="${item.quantity}" />
+							<td th:text="${item.unit.unitName}" />
+
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

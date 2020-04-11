@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>INVENTORY MANAGEMENT SYSTEM</title>
+<link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<h3 class="navbar-item title" style="margin-bottom: 0;">IMS</h3>
+			<a role="button" class="navbar-burger burger" aria-label="menu"
+				aria-expanded="false" data-target="navbarBasicExample"> <span
+				aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+				aria-hidden="true"></span>
+			</a>
+		</div>
+
+		<div id="navbarBasicExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" th:href="@{/dashboard}">Dashboard</a> <a
+					class="navbar-item" th:href="@{/allCategory}">Category</a> <a
+					class="navbar-item" th:href="@{/allProducts}">Products</a><a
+					class="navbar-item" th:href="@{/allUnits}">Units</a> <a
+					class="navbar-item" th:href="@{/mainStock}">Main Stock</a>  <a
+					class="navbar-item" th:href="@{/sales}">Sales</a>
+
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="has-background-dark" style="height: 2px;"></div>
+	<div style="height: 10px;"></div>
+	<h1 th:text="${message}"></h1>
+
+
+
+
+	<div class="level" style="padding-left: 20px">
+		<div>
+			<form th:action="@{/addProduct}" method="get">
+				<div class="field is-grouped">
+					<div class="control">
+						<button type="submit" class="button is-small is-success">
+							ADD PRODUCT</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+
+	</div>
+
+	<div class="level" style="padding-left: 20px">
+		<div class="level-left">
+
+			<div style="width: 800px; margin: auto">
+				<div class="box">
+					<table
+						class="table is-bordered is-striped  is-hoverable is-fullwidth">
+
+						<tr>
+							<th>PRODUCT NAME</th>
+							<th>CATEGORY NAME</th>
+							<th>PRICE</th>
+							<th>ACTION</th>
+						</tr>
+
+						<tr th:each="item: ${productsTable}">
+							<td th:text="${item.ProductName}" />
+							<td th:text="${item.category.categoryName}" />
+							<td th:text="${item.price}" />
+							<td><a th:href="@{/editProduct(id=${item.id})}"
+								class="button is-small is-link">Edit</a> <a
+								th:href="@{/deleteProduct(id=${item.id})}"
+								class="button is-small is-danger">Delete</a></td>
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
